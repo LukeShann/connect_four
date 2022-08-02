@@ -1,4 +1,6 @@
-require_relative '../lib/Game'
+# frozen_string_literal: true
+
+require_relative '../lib/game'
 
 describe Game do
   subject(:created_game) { Game.new }
@@ -17,6 +19,15 @@ describe Game do
     it 'Sets starting player to 1' do
       starting_player = created_game.instance_variable_get(:@current_player)
       expect(starting_player).to eq(1)
+    end
+  end
+
+  context 'Game methods' do
+    context '#change_turn' do
+      subject(:created_game) { Game.new }
+
+      it 'Changes turn from 1 to 2' do
+      end
     end
   end
 end
