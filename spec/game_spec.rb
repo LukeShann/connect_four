@@ -1,16 +1,22 @@
 require_relative '../lib/Game'
 
 describe Game do
+  subject(:created_game) { Game.new }
+
   context 'Creating a new game' do
-    subject { Game.new }
-
-    xit 'Creates a new board object' do
+    it 'Creates a new board object' do
+      expect(Board).to receive(:new)
+      described_class.new
     end
 
-    xit 'Assigns board to an instance variable' do
+    it 'Assigns board to an instance variable' do
+      board = created_game.instance_variable_get(:@board)
+      expect(board).to be_an_instance_of(Board)
     end
 
-    xit 'Sets starting player as yellow' do
+    it 'Sets starting player to 1' do
+      starting_player = created_game.instance_variable_get(:@current_player)
+      expect(starting_player).to eq(1)
     end
   end
 end
