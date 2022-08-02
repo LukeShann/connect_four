@@ -27,8 +27,8 @@ describe Game do
       subject(:turn_game) { Game.new }
 
       it 'Changes turn from 1 to 2' do
-        expect { turn_game.change_turn }.to
-        change(turn_game.instance_variable_get(:@current_player))
+        expect { turn_game.change_turn }.to \
+          change { turn_game.instance_variable_get(:@current_player) }
           .from(1)
           .to(2)
       end
@@ -39,8 +39,8 @@ describe Game do
         end
 
         it 'Changes turn from 2 to 1' do
-          expect { turn_game.change_turn }.to
-          change(turn_game.instance_variable_get(:@current_player))
+          expect { turn_game.change_turn }.to \
+            change { turn_game.instance_variable_get(:@current_player) }
             .from(2)
             .to(1)
         end
