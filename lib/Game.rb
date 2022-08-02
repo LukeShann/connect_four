@@ -7,4 +7,8 @@ class Game
     @board = Board.new
     @current_player = 1
   end
+
+  def change_turn
+    @current_player = @current_player == 1 ? 2 : 1
+  end
 end
