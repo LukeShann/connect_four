@@ -24,9 +24,26 @@ describe Game do
 
   context 'Game methods' do
     context '#change_turn' do
-      subject(:created_game) { Game.new }
+      subject(:turn_game) { Game.new }
 
       it 'Changes turn from 1 to 2' do
+        expect { turn_game.change_turn }.to
+        change(turn_game.instance_variable_get(:@current_player))
+          .from(1)
+          .to(2)
+      end
+
+      context "When it's player 2's turn" do
+        before do
+          turn_game.instance_variable_set(:@current_player, 2)
+        end
+
+        it 'Changes turn from 2 to 1' do
+          expect { turn_game.change_turn }.to
+          change(turn_game.instance_variable_get(:@current_player))
+            .from(2)
+            .to(1)
+        end
       end
     end
   end
