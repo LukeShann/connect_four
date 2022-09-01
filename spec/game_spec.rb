@@ -23,28 +23,46 @@ describe Game do
   end
 
   context 'Game methods' do
+    subject(:test_game) { Game.new }
     context '#change_turn' do
-      subject(:turn_game) { Game.new }
-
       it 'Changes turn from 1 to 2' do
-        expect { turn_game.change_turn }.to \
-          change { turn_game.instance_variable_get(:@current_player) }
+        expect { test_game.change_turn }.to \
+          change { test_game.instance_variable_get(:@current_player) }
           .from(1)
           .to(2)
       end
 
       context "When it's player 2's turn" do
         before do
-          turn_game.instance_variable_set(:@current_player, 2)
+          test_game.instance_variable_set(:@current_player, 2)
         end
 
         it 'Changes turn from 2 to 1' do
-          expect { turn_game.change_turn }.to \
-            change { turn_game.instance_variable_get(:@current_player) }
+          expect { test_game.change_turn }.to \
+            change { test_game.instance_variable_get(:@current_player) }
             .from(2)
             .to(1)
         end
       end
+    end
+
+    context '#get_input' do
+      context 'it is given wrong input once, then correct' do
+        before do
+          allow(test_game).to receive(:input_valid?) { true }
+        end
+
+        it 'asks for input twice' do
+          expect(test_game).to receive()
+          test_game.get_input
+        end
+      end
+    end
+
+    context '#input_valid?' do
+    end
+
+    context '#win_game' do
     end
   end
 end
