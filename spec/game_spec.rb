@@ -58,6 +58,30 @@ describe Game do
     end
   end
 
+  describe '.take_turn' do
+    before do
+      allow(created_game).to receive(:get_input)
+      @board = double('board')
+      created_game.instance_variable_set(:@board, @board)
+      allow(@board).to receive(:make_move)
+    end
+    
+    it 'asks for input again if move is not valid' do
+      allow(@board).to receive(:move_valid?).and_return(false, true)
+      expect(created_game).to receive(:get_input).twice
+      created_game.take_turn
+    end
+
+    context 'move is valid' do
+      it 'sends .make_move correctly' do
+        allow(@board).to receive(:move_valid?).and_return(true)
+        allow(created_game).to receive(:get_input).and_return(6)
+        expect(@board).to receive(:make_move).with(6, 1)
+        created_game.take_turn
+      end
+    end
+  end
+
   describe '#change_turn' do
     it 'Changes turn from 1 to 2' do
       expect { created_game.change_turn }.to \

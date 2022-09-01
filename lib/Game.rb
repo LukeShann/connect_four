@@ -25,6 +25,14 @@ class Game
 
   # Looping script method which will require testing
   def take_turn
+    # display board
+    move = nil
+    loop do
+      move = get_input
+      break if @board.move_valid?(move)
+      # display invalid turn message
+    end
+    @board.make_move(move, @current_player)
   end
   
   def won?
@@ -44,12 +52,6 @@ class Game
   
   def input_valid?(i)
     (1..7).include?(i)
-  end
-  
-  def win_game
-    # Update board
-    # Display victory message
-    # Prompt for restart
   end
 end
 

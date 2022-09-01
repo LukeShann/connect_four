@@ -23,14 +23,14 @@ def play
 end
 
 def take_turn
-    display board
-    move = nil
-    loop do
-       move = get_input
-       break if board.move_valid?(move)
-       display invalid turn message
-     end
-     board.make_move(move, player)
+  display board
+  move = nil
+  loop do
+      move = get_input
+      break if board.move_valid?(move)
+      display invalid turn message
+    end
+    board.make_move(move, player)
 end
 
 def change_turns
