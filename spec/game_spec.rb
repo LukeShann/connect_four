@@ -6,23 +6,23 @@ describe Game do
   subject(:created_game) { Game.new }
 
   describe '.initialize' do
-    context 'Creating a new game' do
-      it 'Creates a new board object' do
+    context 'when creating a new game' do
+      it 'creates a new board object' do
         expect(Board).to receive(:new)
         described_class.new
       end
   
-      it 'Assigns board to an instance variable' do
+      it 'assigns board to an instance variable' do
         board = created_game.instance_variable_get(:@board)
         expect(board).to be_an_instance_of(Board)
       end
   
-      it 'Sets starting player to 1' do
+      it 'sets starting player to 1' do
         starting_player = created_game.instance_variable_get(:@current_player)
         expect(starting_player).to eq(1)
       end
 
-      it 'Sets won variable to false' do
+      it 'sets won variable to false' do
         won = created_game.instance_variable_get(:@won)
         expect(won).to eq(false)
       end
@@ -35,17 +35,17 @@ describe Game do
       allow(created_game).to receive(:change_turn)
     end
 
-    context 'three turns are taken before winning' do
+    context 'when three turns are taken before winning' do
       before do
         allow(created_game).to receive(:won?).and_return(false, false, true)
       end
 
-      it 'continues to take turns' do
+      it 'takes three turns' do
         expect(created_game).to receive(:take_turn).exactly(3).times
         created_game.play
       end
       
-      it 'continues to change turns until won' do
+      it 'changes player twice' do
         expect(created_game).to receive(:change_turn).exactly(2).times
         created_game.play
       end
@@ -72,7 +72,7 @@ describe Game do
       created_game.take_turn
     end
 
-    context 'move is valid' do
+    context 'when a move is valid' do
       it 'sends .make_move correctly' do
         allow(@board).to receive(:move_valid?).and_return(true)
         allow(created_game).to receive(:get_input).and_return(6)
@@ -83,19 +83,19 @@ describe Game do
   end
 
   describe '#change_turn' do
-    it 'Changes turn from 1 to 2' do
+    it 'changes turn from 1 to 2' do
       expect { created_game.change_turn }.to \
         change { created_game.instance_variable_get(:@current_player) }
         .from(1)
         .to(2)
     end
 
-    context "When it's player 2's turn" do
+    context "when it's player 2's turn" do
       before do
         created_game.instance_variable_set(:@current_player, 2)
       end
 
-      it 'Changes turn from 2 to 1' do
+      it 'changes turn from 2 to 1' do
         expect { created_game.change_turn }.to \
           change { created_game.instance_variable_get(:@current_player) }
           .from(2)
@@ -117,7 +117,7 @@ describe Game do
   end
 
   describe '.get_input' do
-    context 'it is given wrong input' do
+    context 'when it is given wrong input' do
       it 'asks for input again' do
         allow(created_game).to receive(:input_valid?).and_return(false, true)
         allow(created_game).to receive(:gets).and_return('5')
@@ -126,7 +126,7 @@ describe Game do
       end
     end
 
-    context 'input is 4' do
+    context 'when input is 4' do
       it 'returns index of 3' do
         allow(created_game).to receive(:input_valid?).and_return(true)
         allow(created_game).to receive(:gets).and_return('4\n')
@@ -135,7 +135,7 @@ describe Game do
     end
   end
 
-  describe '.input_valid?' do
+  describe '#input_valid?' do
     it 'accepts valid input' do
       expect(created_game.input_valid?(5)).to eq(true)
     end
