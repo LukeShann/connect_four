@@ -55,8 +55,8 @@ end
 def intialize(game)
    state = Array.new(7, Array.new(6, nil)
    game = game
-   directional_pairs = [ [[0, 1][0, -1]], [[1, 1],
-      [-1, -1]], [[1, 0], [-1, 0]], [[-1, 1], [1, -1]] ]
+   DIRECTIONAL_PAIRS = [[[0, 1][0, -1]], [[1, 1],
+      [-1, -1]], [[1, 0], [-1, 0]], [[-1, 1], [1, -1]]]
 end
 
 def display_board

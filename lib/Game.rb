@@ -4,7 +4,7 @@ require_relative 'board'
 
 class Game
   def initialize
-    @board = Board.new
+    @board = Board.new(self)
     @won = false
     @current_player = 1
   end
