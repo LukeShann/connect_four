@@ -5,6 +5,7 @@ require_relative 'board'
 class Game
   def initialize
     @board = Board.new
+    @won = false
     @current_player = 1
   end
 
@@ -27,11 +28,13 @@ end
 
 def get_input
   # Prompt for input until valid
-  input = ''
-  until input_valid?(input)
-    puts "#{@current_player == 1 ? 'Yellow' : 'Red'} Player's turn, pick a column"
-    input = gets.to_i
+  input = nil
+  loop do
+    # prompt for input
+    input = gets.chomp.to_i
+    break if input_is_valid?(input)
   end
+  input - 1
 end
 
 def input_valid?(input)
