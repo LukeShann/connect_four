@@ -29,6 +29,35 @@ describe Game do
     end
   end
 
+  describe '.play' do
+    before do
+      allow(created_game).to receive(:take_turn)
+      allow(created_game).to receive(:change_turn)
+    end
+
+    context 'three turns are taken before winning' do
+      before do
+        allow(created_game).to receive(:won?).and_return(false, false, true)
+      end
+
+      it 'continues to take turns' do
+        expect(created_game).to receive(:take_turn).exactly(3).times
+        created_game.play
+      end
+      
+      it 'continues to change turns until won' do
+        expect(created_game).to receive(:change_turn).exactly(2).times
+        created_game.play
+      end
+    end
+
+    it 'does not change turn if game is won' do
+      allow(created_game).to receive(:won?).and_return(true)
+      expect(created_game).to receive(:take_turn).once
+      created_game.play
+    end
+  end
+
   describe '#change_turn' do
     it 'Changes turn from 1 to 2' do
       expect { created_game.change_turn }.to \
@@ -48,6 +77,18 @@ describe Game do
           .from(2)
           .to(1)
       end
+    end
+  end
+
+  describe '.won?' do
+    it 'returns true when @won is true' do
+      created_game.instance_variable_set(:@won, true)
+      expect(created_game.won?).to eq(true)
+    end
+
+    it 'returns false when @won is false' do
+      created_game.instance_variable_set(:@won, false)
+      expect(created_game.won?).to eq(false)
     end
   end
 

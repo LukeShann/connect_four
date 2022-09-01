@@ -20,7 +20,6 @@ def play
       change_turns
    end
    declare winner message
-   ask_for_reset
 end
 
 def take_turn

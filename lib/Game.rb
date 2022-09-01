@@ -14,15 +14,21 @@ class Game
   end
 
   # Looping script method which will require testing
-  def play_game
-    # Call welcome message
-    # Loop through turns
-      # Display whose turn it is
-      # get_input
-      # Update board
-      # Check board for winning state
-        # return win_game if won
-        # If not won change turn
+  def play
+    # display instructions
+    loop do
+      take_turn
+      break if won?
+      change_turn
+    end
+  end
+
+  # Looping script method which will require testing
+  def take_turn
+  end
+  
+  def won?
+    @won
   end
 
   def get_input
