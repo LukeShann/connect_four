@@ -24,25 +24,26 @@ class Game
         # return win_game if won
         # If not won change turn
   end
-end
 
-def get_input
-  # Prompt for input until valid
-  input = nil
-  loop do
-    # prompt for input
-    input = gets.chomp.to_i
-    break if input_is_valid?(input)
+  def get_input
+    # Prompt for input until valid
+    input = nil
+    loop do
+      # prompt for input
+      input = gets.chomp.to_i
+      break if input_valid?(input)
+    end
+    input - 1
   end
-  input - 1
+  
+  def input_valid?(input)
+    # Check if input is an int 1 - 7
+  end
+  
+  def win_game
+    # Update board
+    # Display victory message
+    # Prompt for restart
+  end
 end
 
-def input_valid?(input)
-  # Check if input is an int 1 - 7
-end
-
-def win_game
-  # Update board
-  # Display victory message
-  # Prompt for restart
-end

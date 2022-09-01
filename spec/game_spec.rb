@@ -5,7 +5,7 @@ require_relative '../lib/game'
 describe Game do
   subject(:created_game) { Game.new }
 
-  context '.initialize' do
+  describe '.initialize' do
     context 'Creating a new game' do
       it 'Creates a new board object' do
         expect(Board).to receive(:new)
@@ -29,7 +29,7 @@ describe Game do
     end
   end
 
-  context '.change_turn' do
+  describe '#change_turn' do
     it 'Changes turn from 1 to 2' do
       expect { created_game.change_turn }.to \
         change { created_game.instance_variable_get(:@current_player) }
@@ -51,21 +51,25 @@ describe Game do
     end
   end
 
-  context '.get_input' do
+  describe '.get_input' do
     context 'it is given wrong input' do
-      let(:receiver) { double(created_game) }
-
       it 'asks for input again' do
-        created_game.stub(:get_input) { false }
-        expect(created_game.to receive(:gets).twice)
+        allow(created_game).to receive(:input_valid?).and_return(false, true)
+        allow(created_game).to receive(:gets).and_return('5')
+        expect(created_game).to receive(:gets).twice
         created_game.get_input
+      end
+    end
+
+    context 'input is 4' do
+      it 'returns index of 3' do
+        allow(created_game).to receive(:input_valid?).and_return(true)
+        allow(created_game).to receive(:gets).and_return('4\n')
+        expect(created_game.get_input).to eq(3)
       end
     end
   end
 
   context '.input_valid?' do
-  end
-
-  context '.win_game' do
   end
 end
