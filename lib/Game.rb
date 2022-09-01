@@ -36,8 +36,8 @@ class Game
     input - 1
   end
   
-  def input_valid?(input)
-    # Check if input is an int 1 - 7
+  def input_valid?(i)
+    (1..7).include?(i)
   end
   
   def win_game

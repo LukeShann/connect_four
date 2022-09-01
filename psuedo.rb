@@ -48,7 +48,7 @@ def get_input
    input - 1
 end
 
-def input_is_valid?(i)
+def input_valid?(i)
    (1..7).include?(i)
 end
 

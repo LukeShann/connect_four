@@ -70,6 +70,21 @@ describe Game do
     end
   end
 
-  context '.input_valid?' do
+  describe '.input_valid?' do
+    it 'accepts valid input' do
+      expect(created_game.input_valid?(5)).to eq(true)
+    end
+    
+    it 'rejects 0' do
+      expect(created_game.input_valid?(0)).to eq(false)
+    end
+    
+    it 'rejects high numbers' do
+      expect(created_game.input_valid?(10)).to eq(false)
+    end
+
+    it 'rejects negative numbers' do
+      expect(created_game.input_valid?(-2)).to eq(false)
+    end
   end
 end
