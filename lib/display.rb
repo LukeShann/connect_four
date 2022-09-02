@@ -1,9 +1,17 @@
+# frozen_string_literal: true
+
 require 'colorize'
 
 module Display
   def message(message)
     message_que.push(message)
-    message_que.shift if message_que.length > 3
+
+    if message_que.include?(:welcome)
+      @que = @que.last(3)
+    else
+      @que = @que.last(2)
+    end
+    
     display
   end
 
@@ -41,7 +49,7 @@ module Display
       welcome: "Welcome to Connect 4, get 4 in a Row to win",
       turn_instructions: "#{@current_player == 1 ? 'Red' : 'Yellow'} Player's turn",
       input_instructions: "Enter a column number 1 to 7",
-      invalid_input: "Oops! Enter a number 1 to 7",
+      invalid_input: "Oops! That wasn't quite right",
       invalid_turn: "That column's full! Try another",
       win: "#{@current_player == 1 ? 'Red' : 'Yellow'} Player Wins!"
     }
