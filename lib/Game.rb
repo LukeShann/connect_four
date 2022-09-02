@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 require_relative 'board'
+require_relative 'display'
+
 
 class Game
+  include Display
   attr_accessor :won
 
   def initialize
