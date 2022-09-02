@@ -19,11 +19,14 @@ module Display
   def display_board
     5.downto(0) do |y|
       7.times do |x|
-        position = @board..state[x, y]
+        position = @board.state[x][y]
+        print ' '.on_light_black
         print '⦿'.red.on_light_black if position == 1
         print '⦿'.yellow.on_light_black if position == 2
-        print '◯'.white.on_light_black if position == 0
+        print '●'.black.on_light_black if position == 0
+        print ' '.on_light_black
       end
+      puts
     end
   end
 
@@ -34,7 +37,7 @@ module Display
   def messages
     {
       welcome: "Welcome to Connect 4, get 4 in a Row to win",
-      turn_instructions: "#{@current_player == 1 ? 'Red' : 'Yellow'} Players turn",
+      turn_instructions: "#{@current_player == 1 ? 'Red' : 'Yellow'} Player's turn",
       input_instructions: "Enter a column number 1 to 7",
       invalid_input: "Oops! Enter a number 1 to 7",
       invalid_turn: "That column's full! Try another",

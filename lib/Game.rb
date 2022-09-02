@@ -19,22 +19,26 @@ class Game
 
   def play
     message(:welcome)
+
     loop do
       take_turn
       break if won
       change_turn
     end
+
     message(:win)
   end
 
   def take_turn
     message(:turn_instructions)
+
     move = nil
     loop do
       move = get_input
       break if @board.move_valid?(move)
       message(:invalid_turn)
     end
+
     @board.make_move(move, @current_player)
   end
 
@@ -46,6 +50,7 @@ class Game
       break if input_valid?(input)
       message(:invalid_input)
     end
+
     input - 1
   end
   

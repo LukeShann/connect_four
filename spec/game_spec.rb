@@ -5,6 +5,10 @@ require_relative '../lib/game'
 describe Game do
   subject(:created_game) { Game.new }
 
+  before do
+    allow(created_game).to receive(:message)
+  end
+
   describe '.initialize' do
     context 'when creating a new game' do
       it 'creates a new board object' do
