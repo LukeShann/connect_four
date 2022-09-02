@@ -77,30 +77,32 @@ def make_move(x, player)
 end
 
 def check_for_win(x, y)
-   directional_pairs.any do pair
+   DIRECTIONAL_PAIRS.any do |pair|
       count = 1
-      pair.each do dir
-         count += count_matches(x, y, dir)
+      pair.each do |direction|
+         count += count_matches(x, y, direction)
       end
 
       if count >= 4
-         game.won == true
+         return game.won == true
       end
    end
 end
 
 def count_matches(x, y, direction)
-   return 0 unless next_matches?(x, y,    
-      direction)
-   return 0 unless x.between?(0..6)
-   return 0 unless y.between?(0..6)
-   count_matches(new_coords(x, y)) + 1
+   return 0 unless next_matches?(x, y, direction)
+   count_matches(new_coords(x, y, direction)) + 1
 end
-
+   
 def next_matches?(x, y, direction)
-   state[x, y] == state[new_coords(x,y)]
-end
+   next_x, next_y = new_coords(x, y, direction)
 
+   return false unless next_x.between?(0..6)
+   return false unless next_y.between?(0..5)
+
+   state[x, y] == state[next_x, next_y]
+end
+   
 def new_coords(x, y, direction)
    nx = state[x + direction.first]
    ny = state[y + direction.last]

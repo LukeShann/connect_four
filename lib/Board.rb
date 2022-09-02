@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-DIRECTIONAL_PAIRS = [[[0, 1][0, -1]], [[1, 1],
+DIRECTIONAL_PAIRS = [[[0, 1],[0, -1]], [[1, 1],
   [-1, -1]], [[1, 0], [-1, 0]], [[-1, 1], [1, -1]]]
 
 class Board
@@ -34,15 +34,35 @@ class Board
   end
 
   def check_for_win(x, y)
-  #   directional_pairs.any do |pair|
-  #     count = 1
-  #     pair.each do |dir|
-  #        count += count_matches(x, y, dir)
-  #     end
-
-  #     if count >= 4
-  #        game.won == true
-  #     end
-  #  end
+    DIRECTIONAL_PAIRS.any? do |pair|
+       count = 1
+       pair.each do |direction|
+          count += count_matches(x, y, direction)
+       end
+ 
+       if count >= 4
+          return game.won == true
+       end
+    end
+  end
+ 
+  def count_matches(x, y, direction)
+    return 0 unless next_matches?(x, y, direction)
+    count_matches(new_coords(x, y, direction), direction) + 1
+  end
+    
+  def next_matches?(x, y, direction)
+    next_x, next_y = new_coords(x, y, direction)
+ 
+    return false unless next_x.between?(0, 6)
+    return false unless next_y.between?(0, 5)
+ 
+    state[x][y] == state[next_x][next_y]
+  end
+    
+  def new_coords(x, y, direction)
+    nx = x + direction.first
+    ny = y + direction.last
+    [nx, ny]
   end
 end

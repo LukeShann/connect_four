@@ -64,6 +64,10 @@ describe Board do
     end
 
     describe '.make_move' do
+      before do
+       allow_any_instance_of(Board).to receive(:check_for_win)
+      end
+
       it 'correctly places in empty column' do
         expect { test_board.make_move(0, 1) }.to \
           change { test_board.state[0][3] }
@@ -86,6 +90,26 @@ describe Board do
         expect(test_board).to receive(:check_for_win).with(4, 3)
         test_board.make_move(4, 2)
       end
+    end
+
+    describe '.check_for_win' do
+
+      context 'when the game is not won yet' do
+
+        it 'returns false' do
+          expect(test_board.check_for_win(5,4)).to be(false)
+        end
+
+      end
+
+      context 'when the game is won' do
+
+        before do
+          #win the game
+        end
+
+      end
+
     end
 
   end
