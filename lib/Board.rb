@@ -7,7 +7,7 @@ class Board
   attr_accessor :state
 
   def initialize(game)
-    @state = Array.new(7, Array.new(6, 0))
+    @state = Array.new(7) { Array.new(6, 0) }
     @game = game
   end
 

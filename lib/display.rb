@@ -17,14 +17,16 @@ module Display
   end
 
   def display_board
+    1.upto(7) { |i| print ' '.on_black, i.to_s.light_magenta.on_black, ' '.on_black }
+    puts
     5.downto(0) do |y|
       7.times do |x|
         position = @board.state[x][y]
-        print ' '.on_light_black
-        print '⦿'.red.on_light_black if position == 1
-        print '⦿'.yellow.on_light_black if position == 2
-        print '●'.black.on_light_black if position == 0
-        print ' '.on_light_black
+        print ' '.on_black
+        print '⦿'.light_red.on_black if position == 1
+        print '⦿'.yellow.on_black if position == 2
+        print '●'.black.on_black if position == 0
+        print ' '.on_black
       end
       puts
     end
