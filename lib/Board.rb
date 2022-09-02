@@ -41,23 +41,19 @@ class Board
        end
  
        if count >= 4
-          return game.won == true
+          return @game.won = true
        end
     end
   end
  
   def count_matches(x, y, direction)
-    return 0 unless next_matches?(x, y, direction)
-    count_matches(new_coords(x, y, direction), direction) + 1
-  end
-    
-  def next_matches?(x, y, direction)
     next_x, next_y = new_coords(x, y, direction)
- 
-    return false unless next_x.between?(0, 6)
-    return false unless next_y.between?(0, 5)
- 
-    state[x][y] == state[next_x][next_y]
+
+    return 0 unless next_x.between?(0, 6)
+    return 0 unless next_y.between?(0, 5)
+    return 0 unless state[x][y] == state[next_x][next_y]
+
+    count_matches(next_x, next_y, direction) + 1
   end
     
   def new_coords(x, y, direction)

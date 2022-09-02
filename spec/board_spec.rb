@@ -95,21 +95,47 @@ describe Board do
     describe '.check_for_win' do
 
       context 'when the game is not won yet' do
-
         it 'returns false' do
           expect(test_board.check_for_win(5,4)).to be(false)
         end
 
+        it 'returns false on corner move' do
+          expect(test_board.check_for_win(0,0)).to be(false)
+        end
       end
 
       context 'when the game is won' do
-
         before do
-          #win the game
+          won_board = [[1, 2, 2, 2, 2, 0],
+                       [1, 2, 1, 1, 2, 2],                                                               
+                       [2, 1, 2, 2, 2, 1],                                                               
+                       [1, 2, 1, 1, 2, 0],                                                               
+                       [1, 2, 1, 0, 0, 0],                                                               
+                       [2, 1, 2, 1, 1, 0],                                                               
+                       [1, 1, 1, 1, 1, 1]]
+          test_board.state = won_board
         end
 
-      end
+        it 'detects horizontal wins' do
+          expect(test_board.check_for_win(3, 4)).to be(true)
+        end
 
+        it 'detects vertical wins' do
+          expect(test_board.check_for_win(0, 1)).to be(true)
+        end
+
+        it 'detects diagonal wins' do
+          expect(test_board.check_for_win(6, 0)).to be(true)
+        end
+        
+        it 'detects win from middle of line' do
+          expect(test_board.check_for_win(4, 2)).to be(true)
+        end
+
+        it 'detects win on line of more than 4' do
+          expect(test_board.check_for_win(6, 3)).to be(true)
+        end
+      end
     end
 
   end
