@@ -17,24 +17,23 @@ class Game
     @current_player = @current_player == 1 ? 2 : 1
   end
 
-  # Looping script method which will require testing
   def play
-    # display welcome
+    message(:welcome)
     loop do
       take_turn
       break if won
       change_turn
     end
+    message(:win)
   end
 
   def take_turn
-    # display board
-    # message turn instructions
+    message(:turn_instructions)
     move = nil
     loop do
       move = get_input
       break if @board.move_valid?(move)
-      # display invalid turn message
+      message(:invalid_turn)
     end
     @board.make_move(move, @current_player)
   end
@@ -42,10 +41,10 @@ class Game
   def get_input
     input = nil
     loop do
-      # prompt for input
+      message(:input_instructions)
       input = gets.chomp.to_i
       break if input_valid?(input)
-      # invalid input message
+      message(:invalid_input)
     end
     input - 1
   end

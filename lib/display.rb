@@ -12,7 +12,7 @@ module Display
     display_board
 
     message_que.each do |message|
-      puts message.blue
+      puts messages[message].blue
     end
   end
 
@@ -38,6 +38,7 @@ module Display
       input_instructions: "Enter a column number 1 to 7",
       invalid_input: "Oops! Enter a number 1 to 7",
       invalid_turn: "That column's full! Try another",
+      win: "#{@current_player == 1 ? 'Red' : 'Yellow'} Player Wins!"
     }
   end
 end
