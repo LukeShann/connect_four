@@ -33,7 +33,7 @@ module Display
         print ' '.on_black
         print '⦿'.light_red.on_black if position == 1
         print '⦿'.yellow.on_black if position == 2
-        print '●'.black.on_black if position == 0
+        print '●'.white.on_black if position == 0
         print ' '.on_black
       end
       puts
