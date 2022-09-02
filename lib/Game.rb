@@ -3,6 +3,8 @@
 require_relative 'board'
 
 class Game
+  attr_accessor :won
+
   def initialize
     @board = Board.new(self)
     @won = false
