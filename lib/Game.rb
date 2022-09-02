@@ -20,7 +20,7 @@ class Game
     # display instructions
     loop do
       take_turn
-      break if won?
+      break if won
       change_turn
     end
   end
@@ -35,10 +35,6 @@ class Game
       # display invalid turn message
     end
     @board.make_move(move, @current_player)
-  end
-  
-  def won?
-    @won
   end
 
   def get_input
