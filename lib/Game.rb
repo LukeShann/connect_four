@@ -3,7 +3,6 @@
 require_relative 'board'
 require_relative 'display'
 
-
 class Game
   include Display
   attr_accessor :won
@@ -20,7 +19,7 @@ class Game
 
   # Looping script method which will require testing
   def play
-    # display instructions
+    # display welcome
     loop do
       take_turn
       break if won
@@ -28,9 +27,9 @@ class Game
     end
   end
 
-  # Looping script method which will require testing
   def take_turn
     # display board
+    # message turn instructions
     move = nil
     loop do
       move = get_input
@@ -41,12 +40,12 @@ class Game
   end
 
   def get_input
-    # Prompt for input until valid
     input = nil
     loop do
       # prompt for input
       input = gets.chomp.to_i
       break if input_valid?(input)
+      # invalid input message
     end
     input - 1
   end
